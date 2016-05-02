@@ -5,46 +5,35 @@ var json = body.json()
 
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://adminpos:1234@ds023000.mlab.com:23000/pos')
-
-var Cat = mongoose.model('customers', { cid: String, name: String })
-
-// var kitty = new Cat({ cid: '001', name: 'Bothon' })
-// kitty.save(function (err) {
-//   if (err) {
-//     console.log(err)
-//   } else {
-//     console.log('meow')
-//   }
-// })
-
 app.use(express.static('public'))
 
-app.delete('/readvalue', function (req, res) {
-  Cat.find(function (err, data) {
-    if (err) return console.error(err)
-    res.send(data)
+var Cat = mongoose.model('products', {pid: String, pname: String, pprice: Number})
+
+app.post('/value', json, function (req, res) {
+  var newData = new Cat(req.body)
+  newData.save(function (err) {
+    if (err) {
+      console.log(err)
+    }
+    res.send('success')
   })
 })
 
-app.post('/readvalue', json, function (req, res) {
-  console.log(req.body)
-  res.send(req.body)
+app.delete('/value/:_id', json, function (req, res) {
+  console.log(req.params)
+  Cat.remove(req.params, function (err) {
+    if (err) {
+      console.log(err)
+    }
+    res.send('success')
+  })
 })
-
-// Cat.remove({ cid: '001'}, function (err) {
-//   if (err) // ...
-//     console.log(err)
-// })
 
 app.get('/readvalue', function (req, res) {
   Cat.find(function (err, data) {
     if (err) return console.error(err)
     res.send(data)
   })
-})
-
-app.get('/', function (req, res) {
-  res.send('Hello World!')
 })
 
 app.listen(process.env.PORT || 3000, function () {
