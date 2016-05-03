@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <!-- materialize -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  <script type="text/javascript" src="./js/jquery-2.2.3.min.js"></script>
+  <link rel="stylesheet" href="materialize/css/materialize.min.css">
+  <script src="materialize/js/materialize.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Angualar Js -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-  <script src="controller.js"></script>
+  <script src="./js/angular.min.js"></script>
+  <script src="./js/controller.js"></script>
 </head>
 
 <body ng-app='posApp' ng-controller='posCtrl'>
@@ -49,7 +49,7 @@
               <td>{{v.pid}}</td>
               <td>{{v.pname}}</td>
               <td>{{v.pprice}}</td>
-              <td><a class="btn-floating" ng-click="deleteData(v._id)" onclick="confirm('คุณต้องการลบใช่หรือไม่ ?')"><i class="small material-icons">delete</i></a></td>
+              <td><a class="btn-floating" ng-click="deleteData(v._id)" confirmation-needed="คุณจะลบจริงๆหรือไม่ ?"><i class="small material-icons">delete</i></a></td>
               <td><a class="waves-effect waves-light btn-floating modal-trigger" href="#modal1" ng-click="showData(v._id)"><i class="small material-icons">mode_edit</i></a></td>
             </tr>
           </tbody>
@@ -70,7 +70,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a class=" modal-action modal-close waves-effect waves-green btn" ng-click="editData(editId,newname,newprice)" onclick="confirm('ยืนยันการแก้ไข ?')">Save</a>
+      <a class=" modal-action modal-close waves-effect waves-green btn" ng-click="editData(editId,newname,newprice)" confirmation-needed="ยืนยันการแก้ไข ?">Save</a>
     </div>
   </div>
 
