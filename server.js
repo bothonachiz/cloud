@@ -20,7 +20,7 @@ app.post('/value', json, function (req, res) {
 })
 
 app.delete('/value/:_id', json, function (req, res) {
-  console.log(req.params)
+  // console.log(req.params)
   Cat.remove(req.params, function (err) {
     if (err) {
       console.log(err)
@@ -33,6 +33,26 @@ app.get('/readvalue', function (req, res) {
   Cat.find(function (err, data) {
     if (err) return console.error(err)
     res.send(data)
+  })
+})
+
+app.get('/readvalueIndex/:_id', json, function (req, res) {
+  // console.log(req.params)
+  Cat.find(req.params, function (err, data) {
+    if (err) return console.error(err)
+    // console.log(data)
+    res.send(data)
+  })
+})
+
+app.put('/value', json, function (req, res) {
+  var index = {_id: req.body._id}
+  var newdata = {pname: req.body.pname,pprice: req.body.pprice}
+  Cat.update(index, {$set: newdata}, function (err) {
+    if (err) {
+      console.log(err)
+    }
+    res.send('success')
   })
 })
 
